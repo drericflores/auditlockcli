@@ -1,0 +1,69 @@
+Here are the instructions on how to compile and run the `auditlock_cli` program:
+
+ How to Compile and Run
+
+1.  Save the files:
+
+      * Save the `SecurityScanner.h` content as `SecurityScanner.h`
+      * Save the `SecurityScanner.cpp` content as `SecurityScanner.cpp`
+      * Save the `main.cpp` content as `main.cpp`
+
+    Ensure all three files are in the same directory.
+
+2.  Compile:
+    You will need a C++ compiler that supports the C++17 standard (e.g., GCC version 7 or newer).
+
+    Open your terminal or command prompt, navigate to the directory where you saved the files, and execute the following command:
+
+    CLI:  
+    g++ -std=c++17 SecurityScanner.cpp main.cpp -o auditlock_cli
+    
+
+    Note for some systems: If you encounter linking errors related to `std::filesystem` (e.g., "undefined reference to `std::filesystem::...`"), you might need to explicitly link the `stdc++fs` library. Try this command instead:
+
+    CLI:  
+    g++ -std=c++17 SecurityScanner.cpp main.cpp -o auditlock_cli -lstdc++fs
+    
+
+    Upon successful compilation, an executable file named `auditlock_cli` will be created in your current directory.
+
+3.  Run:
+    Once compiled, you can run the audit tool with various options from your terminal:
+
+      * To perform a comprehensive security audit (Full Audit):
+
+        CLI:  
+        ./auditlock_cli --full-audit
+        
+
+      * To check only password policy settings:
+
+        CLI:  
+        ./auditlock_cli --password-policy
+        
+
+      * To check only kernel security parameters (sysctl):
+
+        CLI:  
+        ./auditlock_cli --kernel-params
+        
+
+      * To check only for outdated software packages (requires 'apt' and internet access):
+
+        CLI:  
+        ./auditlock_cli --outdated-packages
+        
+
+      * To display the usage and help message:
+
+        CLI:  
+        ./auditlock_cli --help
+        
+
+        or
+
+        CLI:  
+        ./auditlock_cli -h
+        
+
+    Important: Some checks, particularly those involving `apt` or `ufw` (`checkOutdatedPackages` and `_checkFirewall`), use `pkexec`. This means you will likely be prompted for your password graphically to grant elevated privileges for those specific commands.
